@@ -1,0 +1,27 @@
+import React, { useState } from 'react';
+import { createARCode } from './apiService';
+
+function CreateARCode() {
+  const [userId, setUserId] = useState('');
+  const [arCode, setArCode] = useState('');
+  const [mediaFileUrl, setMediaFileUrl] = useState('');
+
+  const onCreateARCode = () => {
+    createARCode(userId, arCode, mediaFileUrl).then(response => {
+      console.log('AR code created:', response.data);
+    }).catch(err => {
+      console.error('Error creating AR code:', err);
+    });
+  };
+
+  return (
+    <div>
+      <input type="text" placeholder="User ID" onChange={(e) => setUserId(e.target.value)} />
+      <input type="text" placeholder="AR Code" onChange={(e) => setArCode(e.target.value)} />
+      <input type="text" placeholder="Media File URL" onChange={(e) => setMediaFileUrl(e.target.value)} />
+      <button onClick={onCreateARCode}>Create AR Code</button>
+    </div>
+  );
+}
+
+export default CreateARCode;

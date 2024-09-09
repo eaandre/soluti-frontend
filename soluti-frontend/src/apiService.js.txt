@@ -1,0 +1,17 @@
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5000'; // Replace with your backend URL if different
+
+export const uploadFile = (file) => {
+  const formData = new FormData();
+  formData.append('media', file);
+  return axios.post(`${API_URL}/upload`, formData);
+};
+
+export const createARCode = (userId, arCode, mediaFileUrl) => {
+  return axios.post(`${API_URL}/ar-code`, { userId, arCode, mediaFileUrl });
+};
+
+export const getARCodes = (userId) => {
+  return axios.get(`${API_URL}/user/${userId}/ar-codes`);
+};
